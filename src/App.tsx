@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./components/Root";
-import { Home } from "./pages/Home";
-import { Sobre } from "./pages/Sobre";
+import Root from "./components/Root/Root";
+import { HomePage } from "./pages/Home/HomePage";
+import { ReservaPage } from "./pages/Reserva/ReservaPage";
+import { SobrePage } from "./pages/Sobre/SobrePage";
 
 const router = createBrowserRouter([
   {
@@ -9,17 +10,18 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <HomePage />
       },
       {
         path: "/sobre",
-        element: <Sobre />
+        element: <SobrePage />
       },
       {
         path: "/reserva",
+        element: <ReservaPage />
       },
       {
-        path: "/acomodacoes"
+        path: "/acomodacoes",
       },
       {
         path: "/cadastro"

@@ -1,4 +1,4 @@
-export function Sobre() {
+export function SobrePage() {
   return (
     <div>
       Sobre
