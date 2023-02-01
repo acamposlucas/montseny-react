@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import "../../sass/pages/login.scss";
 
 
@@ -28,7 +28,7 @@ export function LoginPage() {
                         <a href="index.html" className="links"
                             >Esqueci minha senha</a
                         >
-                        <a href="cadastro.html" className="links">Cadastrar-se</a>
+                        <Link className="links" to="/cadastro">Cadastrar-se</Link>
                     </div>
                 </form>
                 </main>
