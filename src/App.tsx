@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root/Root";
 import { HomePage } from "./pages/Home/HomePage";
+import { LoginPage } from "./pages/Login/LoginPage";
 import { ReservaPage } from "./pages/Reserva/ReservaPage";
 import { SobrePage } from "./pages/Sobre/SobrePage";
 
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
         path: "/cadastro"
       },
       {
-        path: "/login"
+        path: "/login",
+        element: <LoginPage/>
       },
       {
         path: "/contato"
