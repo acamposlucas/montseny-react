@@ -1,0 +1,141 @@
+@use "src/sass/sass-utils/_variaveis.scss" as v;
+@use "src/sass/sass-utils/_mixins.scss" as m;
+@use "src/sass/sass-utils/_functions.scss" as f;
+
+.reserva__container {
+  @include m.container;
+
+  h2 {
+    text-align: center;
+    font-size: v.$text-2xl
+  }
+
+  .reserva__formulario {
+
+    fieldset {
+      border: none;
+      max-width: 1120px;
+      margin-inline: auto;
+
+      & + fieldset {
+        margin-block-start: f.pxToRem(16);
+      }
+
+      legend {
+        color: v.$cor-principal;
+        font-size: v.$text-lg;
+        text-align: center;
+        margin-block-end: f.pxToRem(16);
+      }
+
+      .form-group {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: f.pxToRem(16);
+        justify-content: center;
+
+        @media(min-width: 768px) {
+          flex-direction: row;
+        }
+      }
+
+      .form-control {
+        align-items: center;
+        display: flex;
+        gap: f.pxToRem(4);
+        justify-content: flex-start;
+
+        label {
+          display: block;
+        }
+
+        input {
+          border: 1px solid black;
+          border-radius: 8px;
+          display: block;
+          padding-block: f.pxToRem(8);
+          padding-inline: f.pxToRem(8);
+
+          &[type="number"] {
+            width: fit-content;
+            text-align: right;
+            margin-inline: auto;
+          }
+        }
+      }
+    }
+
+    .quartos__container {
+      display: grid;
+      gap: f.pxToRem(16);
+    }
+
+    .quarto__card {
+      display: grid;
+
+      @media (min-width: 768px) {
+        grid-template-columns: auto 1fr;
+        gap: f.pxToRem(16);
+      }
+
+      .image__container {
+        img {
+          width: 100%;
+          height: 100%;
+          border-start-start-radius: 6px;
+          border-start-end-radius: 6px;
+
+          @media (min-width: 768px) {
+            width: calc(256px + 2vw);
+            height: 100%;
+            border-radius: 6px;
+          }
+        }
+      }
+
+      .quarto__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-block-end: 1px solid v.$cor-letra-escura;
+        border-inline: 1px solid v.$cor-letra-escura;
+        border-end-start-radius: 6px;
+        border-end-end-radius: 6px;
+        padding-inline: f.pxToRem(16);
+        padding-block: f.pxToRem(8);
+
+        @media (min-width: 768px) {
+          padding-block: f.pxToRem(16);
+          border: 0;
+        }
+
+        h2 {
+          text-align: left;
+          color: v.$cor-letra-escura;
+          margin-block-end: f.pxToRem(8);
+        }
+
+        p {
+          margin-block-end: f.pxToRem(8);
+        }
+
+        strong {
+          font-size: v.$text-lg;
+        }
+
+        .form-control {
+          input[type="radio"] {
+            accent-color: v.$cor-secundaria;
+            aspect-ratio: 1;
+            width: 18px;
+          }
+
+          font-size: v.$text-lg;
+        }
+
+
+      }
+    }
+  }
+}

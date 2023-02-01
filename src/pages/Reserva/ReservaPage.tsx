@@ -1,15 +1,16 @@
 import { useState } from "react";
+import "./styles.scss";
 
 interface Quarto {
-  id: number,
-  nome: string,
-  descricao: string,
-  valor: number,
-  imgUrl: string
+	id: number;
+	nome: string;
+	descricao: string;
+	valor: number;
+	imgUrl: string;
 }
 
 interface Reserva {
-  checkIn: string;
+	checkIn: string;
 	checkOut: string;
 	quantidadeDePessoas: number;
 	quarto: Quarto;
@@ -33,7 +34,7 @@ const quartos: Quarto[] = [
 		descricao:
 			"O Chalé Master, com aproximadamente 50m² de requinte e aconchego, oferece quarto e hall de entrada totalmente integrados e separados da área externa. Possui uma vista única que proporcionará uma experiência inesquecível, um banheiro e lareira para os dias de frio.",
 		valor: 200,
-		imgUrl: "src/assets/images/quarto_master.webp"
+		imgUrl: "src/assets/images/quarto_master.webp",
 	},
 	{
 		id: 3,
@@ -41,117 +42,135 @@ const quartos: Quarto[] = [
 		descricao:
 			"O Chalé Luxo Família é ideal para famílias de até 4 pessoas. Possui uma encantadora vista do vale e do lago e uma aconchegante lareira para os dias de frio. Conta com uma linda área externa e varanda privativa.",
 		valor: 200,
-		imgUrl: "src/assets/images/quarto_familia.webp"
+		imgUrl: "src/assets/images/quarto_familia.webp",
 	},
 ];
 
 export function ReservaPage() {
-  const [reserva, setReserva] = useState<Reserva>({
-    checkIn: "",
-    checkOut: "",
-    quantidadeDePessoas: 0,
-    quarto: {
-      id: 0,
-      nome: "",
-      descricao: "",
-      imgUrl: "",
-      valor: 0
-    },
-    servicos: [],
-    totalDeDias: 0,
-    total: 0,
-  })
+	const [reserva, setReserva] = useState<Reserva>({
+		checkIn: "",
+		checkOut: "",
+		quantidadeDePessoas: 0,
+		quarto: {
+			id: 0,
+			nome: "",
+			descricao: "",
+			imgUrl: "",
+			valor: 0,
+		},
+		servicos: [],
+		totalDeDias: 0,
+		total: 0,
+	});
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.name === "quarto") {
-      const quarto = quartos.find(el => el.id === Number(event.target.value))!;
+	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+		if (event.target.name === "quarto") {
+			const quarto = quartos.find(
+				(el) => el.id === Number(event.target.value)
+			)!;
 
-      setReserva({
-        ...reserva,
-        [event.target.name]: quarto,
-      })
-      console.log("reserva:", reserva)
+			setReserva({
+				...reserva,
+				[event.target.name]: quarto,
+			});
+			console.log("reserva:", reserva);
 
-      return;
-    }
+			return;
+		}
 
-    setReserva({
+		setReserva({
 			...reserva,
 			[event.target.name]: event.target.value,
 		});
 
-    console.log("reserva:", reserva)
-  }
+		console.log("reserva:", reserva);
+	}
 
 	return (
 		<>
-			<section>
+			<section className="reserva__container">
 				<h2>Minha Reserva</h2>
-				<form id="formularioReserva">
+				<form
+					className="reserva__formulario"
+					id="formularioReserva"
+				>
 					<fieldset>
-						<legend>Datas</legend>
-						<div>
-							<label htmlFor="checkIn">Check in</label>
-							<input
-								type="date"
-								id="checkIn"
-								name="checkIn"
-								defaultValue={""}
-								onChange={handleChange}
-							/>
-						</div>
-						<div>
-							<label htmlFor="checkOut">Check out</label>
-							<input
-								type="date"
-								id="checkOut"
-								name="checkOut"
-								defaultValue={""}
-								onChange={handleChange}
-							/>
-						</div>
-						<div>
-							<label htmlFor="quantidadeDePessoas">
-								Quantidade de pessoas
-							</label>
-							<input
-								type="number"
-								id="quantidadeDePessoas"
-								name="quantidadeDePessoas"
-								min={1}
-								max={4}
-								defaultValue={1}
-								onChange={handleChange}
-							/>
+						<legend>Datas e quantidade de pessoas</legend>
+						<div className="form-group">
+							<div className="form-control">
+								<label htmlFor="checkIn">Check in</label>
+								<input
+									type="date"
+									id="checkIn"
+									name="checkIn"
+									defaultValue={""}
+									onChange={handleChange}
+								/>
+							</div>
+							<div className="form-control">
+								<label htmlFor="checkOut">Check out</label>
+								<input
+									type="date"
+									id="checkOut"
+									name="checkOut"
+									defaultValue={""}
+									onChange={handleChange}
+								/>
+							</div>
+							<div className="form-control">
+								<label htmlFor="quantidadeDePessoas">
+									Quantidade de pessoas
+								</label>
+								<input
+									type="number"
+									id="quantidadeDePessoas"
+									name="quantidadeDePessoas"
+									min={1}
+									max={4}
+									defaultValue={1}
+									onChange={handleChange}
+								/>
+							</div>
 						</div>
 					</fieldset>
 					<fieldset>
 						<legend>Quartos</legend>
-						<div role="radiogroup">
+						<div
+							className="quartos__container"
+							role="radiogroup"
+						>
 							{quartos.map((quarto) => (
-								<div key={quarto.id}>
-									<img
-										src={quarto.imgUrl}
-										alt=""
-									/>
-									<div>
-										<strong>{quarto.nome}</strong>
-										<p>{quarto.descricao}</p>
-										<strong>{quarto.valor}</strong>
-									</div>
-									<div>
-										<input
-											type="radio"
-											id={quarto.nome.toLowerCase()}
-											name="quarto"
-											value={quarto.id}
-											onChange={handleChange}
+								<div className="quarto__card">
+									<div
+										className="image__container"
+										key={quarto.id}
+									>
+										<img
+											src={quarto.imgUrl}
+											alt=""
 										/>
-										<label
-											htmlFor={quarto.nome.toLowerCase()}
-										>
-											{quarto.nome}
-										</label>
+									</div>
+									<div className="quarto__content">
+										<h2>{quarto.nome}</h2>
+										<p>{quarto.descricao}</p>
+										<strong>{Intl.NumberFormat("pt-br", {
+                      style: "currency",
+                      currency: "BRL"
+                    }).format(quarto.valor)}</strong>
+										<div className="form-control">
+											<input
+												type="radio"
+												id={quarto.nome.toLowerCase()}
+												name="quarto"
+												value={quarto.id}
+												onChange={handleChange}
+											/>
+											<label
+												htmlFor={quarto.nome.toLowerCase()}
+											>
+												{quarto.nome}
+											</label>
+										</div>
 									</div>
 								</div>
 							))}
