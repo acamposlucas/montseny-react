@@ -7,7 +7,7 @@ export default function Header() {
 			<div className="header__logo__container">
 				<img
 					className="header__logo__img"
-					src="src/assets/logoColorida.svg"
+					src="src/assets/images/logoColorida.svg"
 					alt=""
 				/>
 			</div>
