@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root/Root";
+import { Acomodacoes } from "./pages/Acomodacoes/Acomodacoes";
 import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { ReservaPage } from "./pages/Reserva/ReservaPage";
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/acomodacoes",
+        element: <Acomodacoes />
       },
       {
         path: "/cadastro"
