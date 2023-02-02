@@ -12,6 +12,26 @@
 
   .reserva__formulario {
 
+    button[type="submit"] {
+      background-color: v.$cor-principal;
+      color: v.$cor-letra-clara;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding-block: f.pxToRem(8);
+      padding-inline: f.pxToRem(16);
+      margin-block-start: f.pxToRem(16);
+      display: block;
+      margin-inline: auto;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+
+      &:hover {
+        border-color: v.$cor-principal;
+        background-color: transparent;
+        color: v.$cor-principal;
+      }
+    }
+
     fieldset {
       border: none;
       max-width: 1120px;

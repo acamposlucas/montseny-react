@@ -1,0 +1,37 @@
+@use "src/sass/sass-utils/functions.scss" as f;
+
+.dialog__trigger {
+  position: fixed;
+  top: 50%;
+  right: 5vw;
+}
+
+.dialog__overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+}
+
+.dialog__content {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 25px;
+
+  .dialog__description {
+    display: flex;
+    flex-direction: column;
+    gap: f.pxToRem(16);
+  }
+
+  button[type="button"] {
+    margin-block-start: f.pxToRem(16);
+  }
+}

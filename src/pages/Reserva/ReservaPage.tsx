@@ -1,5 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import "./styles.scss";
+import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
 
 interface Quarto {
 	id: number;
@@ -140,7 +142,10 @@ export function ReservaPage() {
 							role="radiogroup"
 						>
 							{quartos.map((quarto) => (
-								<div className="quarto__card">
+								<div
+									className="quarto__card"
+									key={quarto.id}
+								>
 									<div
 										className="image__container"
 										key={quarto.id}
@@ -153,10 +158,12 @@ export function ReservaPage() {
 									<div className="quarto__content">
 										<h2>{quarto.nome}</h2>
 										<p>{quarto.descricao}</p>
-										<strong>{Intl.NumberFormat("pt-br", {
-                      style: "currency",
-                      currency: "BRL"
-                    }).format(quarto.valor)}</strong>
+										<strong>
+											{Intl.NumberFormat("pt-br", {
+												style: "currency",
+												currency: "BRL",
+											}).format(quarto.valor)}
+										</strong>
 										<div className="form-control">
 											<input
 												type="radio"
@@ -176,45 +183,10 @@ export function ReservaPage() {
 							))}
 						</div>
 					</fieldset>
+					<button type="submit">Finalizar reserva</button>
 				</form>
 			</section>
-			<div>
-				<h3>Resumo da reserva</h3>
-				<div>
-					<span>
-						Apartamento:{" "}
-						<strong>
-							{reserva.quarto ? reserva.quarto.nome : ""}
-						</strong>
-					</span>
-				</div>
-				<div>
-					<span>
-						Check-in:{" "}
-						<strong>
-							{reserva.checkIn ? reserva.checkIn : ""}
-						</strong>
-					</span>
-				</div>
-				<div>
-					<span>
-						Check out:{" "}
-						<strong>
-							{reserva.checkOut ? reserva.checkOut : ""}
-						</strong>
-					</span>
-				</div>
-				<div>
-					<span>
-						Quantidade de pessoas:{" "}
-						<strong>
-							{reserva.quantidadeDePessoas
-								? reserva.quantidadeDePessoas
-								: ""}
-						</strong>
-					</span>
-				</div>
-			</div>
+      <ResumoReserva reserva={reserva} />
 		</>
 	);
 }
