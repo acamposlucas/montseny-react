@@ -6,7 +6,7 @@ export interface Reserva {
 	checkOut: string;
 	quantidadeDePessoas: number;
 	quarto: Quarto;
-	servicos: Servico[];
+	servicosSelecionados: Servico[];
 	totalDeDias: number;
 	total: number;
 }

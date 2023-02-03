@@ -3,211 +3,176 @@
 @use "src/sass/sass-utils/_functions.scss" as f;
 
 .reserva__container {
-  @include m.container;
+	@include m.container;
 
-  h2 {
-    text-align: center;
-    font-size: v.$text-2xl
-  }
+	h2 {
+		text-align: center;
+		font-size: v.$text-2xl;
+	}
 
-  .reserva__formulario {
+	.reserva__formulario {
+		button[type="submit"] {
+			background-color: v.$cor-principal;
+			color: v.$cor-letra-clara;
+			border: 1px solid transparent;
+			border-radius: 6px;
+			padding-block: f.pxToRem(8);
+			padding-inline: f.pxToRem(16);
+			margin-block-start: f.pxToRem(16);
+			display: block;
+			margin-inline: auto;
+			cursor: pointer;
+			transition: all 200ms ease-in-out;
 
-    button[type="submit"] {
-      background-color: v.$cor-principal;
-      color: v.$cor-letra-clara;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      padding-block: f.pxToRem(8);
-      padding-inline: f.pxToRem(16);
-      margin-block-start: f.pxToRem(16);
-      display: block;
-      margin-inline: auto;
-      cursor: pointer;
-      transition: all 200ms ease-in-out;
+			&:hover {
+				border-color: v.$cor-principal;
+				background-color: transparent;
+				color: v.$cor-principal;
+			}
+		}
 
-      &:hover {
-        border-color: v.$cor-principal;
-        background-color: transparent;
-        color: v.$cor-principal;
-      }
-    }
+		fieldset {
+			border: none;
+			max-width: 1120px;
+			margin-inline: auto;
 
-    fieldset {
-      border: none;
-      max-width: 1120px;
-      margin-inline: auto;
+			& + fieldset {
+				margin-block-start: f.pxToRem(16);
+			}
 
-      & + fieldset {
-        margin-block-start: f.pxToRem(16);
-      }
+			legend {
+				color: v.$cor-principal;
+				font-size: v.$text-lg;
+				// text-align: center;
+				margin-block-end: f.pxToRem(16);
+			}
 
-      legend {
-        color: v.$cor-principal;
-        font-size: v.$text-lg;
-        text-align: center;
-        margin-block-end: f.pxToRem(16);
-      }
+			.form-group {
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+				gap: f.pxToRem(16);
+				justify-content: center;
 
-      .form-group {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        gap: f.pxToRem(16);
-        justify-content: center;
+				@media (min-width: 768px) {
+					flex-direction: row;
+				}
+			}
 
-        @media(min-width: 768px) {
-          flex-direction: row;
-        }
-      }
+			.form-control {
+				align-items: center;
+				display: flex;
+				gap: f.pxToRem(4);
+				justify-content: flex-start;
 
-      .form-control {
-        align-items: center;
-        display: flex;
-        gap: f.pxToRem(4);
-        justify-content: flex-start;
+				label {
+					display: block;
+				}
 
-        label {
-          display: block;
-        }
+				input {
+					border: 1px solid black;
+					border-radius: 8px;
+					display: block;
+					padding-block: f.pxToRem(8);
+					padding-inline: f.pxToRem(8);
 
-        input {
-          border: 1px solid black;
-          border-radius: 8px;
-          display: block;
-          padding-block: f.pxToRem(8);
-          padding-inline: f.pxToRem(8);
+					&[type="number"] {
+						width: fit-content;
+						text-align: right;
+						margin-inline: auto;
+					}
+				}
+			}
+		}
 
-          &[type="number"] {
-            width: fit-content;
-            text-align: right;
-            margin-inline: auto;
-          }
-        }
-      }
-    }
+		.quartos__container {
+			display: grid;
+			gap: f.pxToRem(16);
+		}
 
-    .quartos__container {
-      display: grid;
-      gap: f.pxToRem(16);
-    }
+		.quarto__card {
+			display: grid;
 
-    .quarto__card {
-      display: grid;
+			@media (min-width: 768px) {
+				grid-template-columns: auto 1fr;
+				gap: f.pxToRem(16);
+			}
 
-      @media (min-width: 768px) {
-        grid-template-columns: auto 1fr;
-        gap: f.pxToRem(16);
-      }
+			.image__container {
+				img {
+					width: 100%;
+					height: 100%;
+					border-start-start-radius: 6px;
+					border-start-end-radius: 6px;
 
-      .image__container {
-        img {
-          width: 100%;
-          height: 100%;
-          border-start-start-radius: 6px;
-          border-start-end-radius: 6px;
+					@media (min-width: 768px) {
+						width: calc(256px + 2vw);
+						height: 100%;
+						border-radius: 6px;
+					}
+				}
+			}
 
-          @media (min-width: 768px) {
-            width: calc(256px + 2vw);
-            height: 100%;
-            border-radius: 6px;
-          }
-        }
-      }
+			.quarto__content {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				border-block-end: 1px solid v.$cor-letra-escura;
+				border-inline: 1px solid v.$cor-letra-escura;
+				border-end-start-radius: 6px;
+				border-end-end-radius: 6px;
+				padding-inline: f.pxToRem(16);
+				padding-block: f.pxToRem(8);
 
-      .quarto__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-block-end: 1px solid v.$cor-letra-escura;
-        border-inline: 1px solid v.$cor-letra-escura;
-        border-end-start-radius: 6px;
-        border-end-end-radius: 6px;
-        padding-inline: f.pxToRem(16);
-        padding-block: f.pxToRem(8);
+				@media (min-width: 768px) {
+					padding-block: f.pxToRem(16);
+					border: 0;
+				}
 
-        @media (min-width: 768px) {
-          padding-block: f.pxToRem(16);
-          border: 0;
-        }
+				h2 {
+					text-align: left;
+					color: v.$cor-letra-escura;
+					margin-block-end: f.pxToRem(8);
+				}
 
-        h2 {
-          text-align: left;
-          color: v.$cor-letra-escura;
-          margin-block-end: f.pxToRem(8);
-        }
+				p {
+					margin-block-end: f.pxToRem(8);
+				}
 
-        p {
-          margin-block-end: f.pxToRem(8);
-        }
+				strong {
+					font-size: v.$text-lg;
+				}
 
-        strong {
-          font-size: v.$text-lg;
-        }
+				.form-control {
+					input[type="radio"] {
+						accent-color: v.$cor-secundaria;
+						aspect-ratio: 1;
+						width: 18px;
+					}
 
-        .form-control {
-          input[type="radio"] {
-            accent-color: v.$cor-secundaria;
-            aspect-ratio: 1;
-            width: 18px;
-          }
-
-          font-size: v.$text-lg;
-        }
-
-
-      }
-    }
-
-
-  }
+					font-size: v.$text-lg;
+				}
+			}
+		}
+	}
 }
 
-.CollapsibleRoot {
-  .servicos__container {
-    justify-content: center;
-    display: flex;
-    gap: f.pxToRem(8);
-  }
+.checkbox__list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: f.pxToRem(8);
+  margin-block-start: f.pxToRem(8);
 
-  .IconButton {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    border: 1px solid v.$cor-principal;
-    padding-inline: 8px;
-    padding-block: 8px;
-    border-radius: 6px;
+	.checkbox__container {
+		align-items: center;
+		display: flex;
+		gap: f.pxToRem(8);
 
-    &:hover {
-      background-color: v.$cor-principal;
-      color: v.$cor-letra-clara;
-    }
-  }
-
-  .Text {
-    font-size: v.$text-lg;
-  }
-
-  .collapsible__content {
-    display: flex;
-    gap: f.pxToRem(8);
-    justify-content: center;
-    margin-block-start: f.pxToRem(16);
-  }
-
-  .checkbox__container {
-    display: flex;
-    align-items: center;
-    gap: f.pxToRem(8);
-
-    .CheckboxRoot {
-      background-color: white;
-      width: 25px;
-      height: 25px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+		.checkbox {
+			width: 24px;
+			height: 24px;
+			border-radius: 4px;
+		}
+	}
 }

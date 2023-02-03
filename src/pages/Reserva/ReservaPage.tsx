@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import * as Collapsible from "@radix-ui/react-collapsible";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import { CheckIcon } from "@radix-ui/react-icons";
+import React, { FormEvent, useState } from "react";
 import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
-import "./styles.scss";
 import { Quarto, Reserva } from "../../@types/interfaces";
+import "./styles.scss";
 
 const quartos: Quarto[] = [
 	{
@@ -53,24 +50,52 @@ export function ReservaPage() {
 			imgUrl: "",
 			valor: 0,
 		},
-		servicos: [],
+		servicosSelecionados: [],
 		totalDeDias: 0,
 		total: 0,
 	});
 	const [open, setOpen] = React.useState(false);
+
+	function handleOpenServicosExtras() {
+		setOpen((state) => !state);
+	}
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		if (event.target.name === "quarto") {
 			const quarto = quartos.find(
 				(el) => el.id === Number(event.target.value)
 			)!;
-
 			setReserva({
 				...reserva,
 				[event.target.name]: quarto,
 			});
-			console.log("reserva:", reserva);
+			return;
+		}
 
+		if (event.target.name === "servicos") {
+			const servicoSelecionado = servicos.find(
+				(el) => el.id === event.target.value
+			)!;
+			if (event.target.checked) {
+				const servicosSelecionados = [
+					...reserva.servicosSelecionados,
+					servicoSelecionado,
+				];
+				setReserva({
+					...reserva,
+					servicosSelecionados,
+				});
+			} else {
+				const servicosSelecionados =
+					reserva.servicosSelecionados.filter(
+						(servico) => servico.id !== servicoSelecionado.id
+					);
+				setReserva({
+					...reserva,
+					servicosSelecionados,
+				});
+			}
+			console.log(reserva);
 			return;
 		}
 
@@ -78,8 +103,11 @@ export function ReservaPage() {
 			...reserva,
 			[event.target.name]: event.target.value,
 		});
+	}
 
-		console.log("reserva:", reserva);
+	function handleOnSubmit(e: FormEvent) {
+		e.preventDefault();
+		console.log(reserva);
 	}
 
 	return (
@@ -89,6 +117,7 @@ export function ReservaPage() {
 				<form
 					className="reserva__formulario"
 					id="formularioReserva"
+					onSubmit={handleOnSubmit}
 				>
 					<fieldset>
 						<legend>Datas e quantidade de pessoas</legend>
@@ -179,40 +208,32 @@ export function ReservaPage() {
 					</fieldset>
 					<fieldset>
 						<legend className="sr-only">Serviços Extras</legend>
-						<Collapsible.Root
-							className="CollapsibleRoot"
-							open={open}
-							onOpenChange={setOpen}
+						<button
+            className=""
+							type="button"
+							onClick={handleOpenServicosExtras}
 						>
-							<div className="servicos__container">
-								<Collapsible.Trigger asChild>
-									<button className="IconButton">
-										Adicionar serviços extras
-									</button>
-								</Collapsible.Trigger>
-							</div>
-							<Collapsible.Content className="collapsible__content">
+							Adicionar serviços extras
+						</button>
+						{open && (
+							<ul className="checkbox__list">
 								{servicos.map(({ id, nome }) => (
-									<div className="checkbox__container">
-										<Checkbox.Root
-											className="CheckboxRoot"
-											name={id}
-											id={id}
-										>
-											<Checkbox.Indicator className="CheckboxIndicator">
-												<CheckIcon />
-											</Checkbox.Indicator>
-										</Checkbox.Root>
-										<label
-											className="Label"
-											htmlFor={id}
-										>
-											{nome}
-										</label>
-									</div>
+									<li
+										key={id}
+										className="checkbox__container"
+									>
+										<input
+											className="checkbox"
+											type="checkbox"
+											name="servicos"
+											value={id}
+											onChange={handleChange}
+										/>
+										{nome}
+									</li>
 								))}
-							</Collapsible.Content>
-						</Collapsible.Root>
+							</ul>
+						)}
 					</fieldset>
 					<button type="submit">Finalizar reserva</button>
 				</form>

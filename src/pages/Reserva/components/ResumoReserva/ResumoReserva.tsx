@@ -7,26 +7,27 @@ export default function ResumoReserva({ reserva }: { reserva: Reserva }) {
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger className="dialog__trigger">
-        <span className="sr-only">Ver resumo da reserva</span>
-        <BookmarkFilledIcon />
-      </Dialog.Trigger>
+				<span className="sr-only">Ver resumo da reserva</span>
+				<BookmarkFilledIcon />
+			</Dialog.Trigger>
 			<Dialog.Portal>
 				<Dialog.Overlay className="dialog__overlay" />
-				<Dialog.Content className="dialog__content">
+				<Dialog.Content
+					className="dialog__content"
+					aria-describedby={undefined}
+				>
 					<Dialog.Title>Resumo da reserva</Dialog.Title>
-					<Dialog.Description className="dialog__description">
-            <h3>{reserva.quarto.nome}</h3>
-						<div className="img__container">
-              <figure>
-							<img
-								src={reserva.quarto.imgUrl}
-								alt=""
-							/>
-              <caption>
+					<div className="dialog__description">
+						<h3>{reserva.quarto.nome}</h3>
+            <figure className="img__container">
+              <img
+                src={reserva.quarto.imgUrl}
+                alt=""
+              />
+              <figcaption>
                 {reserva.quarto.descricao}
-              </caption>
-              </figure>
-						</div>
+              </figcaption>
+            </figure>
 						<span>
 							Check-in:{" "}
 							<strong>
@@ -47,7 +48,12 @@ export default function ResumoReserva({ reserva }: { reserva: Reserva }) {
 									: ""}
 							</strong>
 						</span>
-					</Dialog.Description>
+					</div>
+          <ul>
+            {reserva.servicosSelecionados.map((servico) => (
+              <li key={servico.id}>{servico.nome}</li>
+            ))}
+          </ul>
 					<Dialog.Close>Fechar</Dialog.Close>
 				</Dialog.Content>
 			</Dialog.Portal>
