@@ -1,25 +1,10 @@
 import React, { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import "./styles.scss";
+import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Checkbox from "@radix-ui/react-checkbox";
+import { CheckIcon } from "@radix-ui/react-icons";
 import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
-
-interface Quarto {
-	id: number;
-	nome: string;
-	descricao: string;
-	valor: number;
-	imgUrl: string;
-}
-
-interface Reserva {
-	checkIn: string;
-	checkOut: string;
-	quantidadeDePessoas: number;
-	quarto: Quarto;
-	servicos: [];
-	totalDeDias: number;
-	total: number;
-}
+import "./styles.scss";
+import { Quarto, Reserva } from "../../@types/interfaces";
 
 const quartos: Quarto[] = [
 	{
@@ -48,6 +33,14 @@ const quartos: Quarto[] = [
 	},
 ];
 
+const servicos = [
+	{ id: "cofre", nome: "Cofre", valor: 20 },
+	{ id: "pet", nome: "Pet", valor: 30 },
+	{ id: "almoco", nome: "Almoço", valor: 40 },
+	{ id: "massagem", nome: "Massagem", valor: 50 },
+	{ id: "banheiro", nome: "Banheiro", valor: 60 },
+];
+
 export function ReservaPage() {
 	const [reserva, setReserva] = useState<Reserva>({
 		checkIn: "",
@@ -64,6 +57,7 @@ export function ReservaPage() {
 		totalDeDias: 0,
 		total: 0,
 	});
+	const [open, setOpen] = React.useState(false);
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		if (event.target.name === "quarto") {
@@ -183,10 +177,47 @@ export function ReservaPage() {
 							))}
 						</div>
 					</fieldset>
+					<fieldset>
+						<legend className="sr-only">Serviços Extras</legend>
+						<Collapsible.Root
+							className="CollapsibleRoot"
+							open={open}
+							onOpenChange={setOpen}
+						>
+							<div className="servicos__container">
+								<Collapsible.Trigger asChild>
+									<button className="IconButton">
+										Adicionar serviços extras
+									</button>
+								</Collapsible.Trigger>
+							</div>
+							<Collapsible.Content className="collapsible__content">
+								{servicos.map(({ id, nome }) => (
+									<div className="checkbox__container">
+										<Checkbox.Root
+											className="CheckboxRoot"
+											name={id}
+											id={id}
+										>
+											<Checkbox.Indicator className="CheckboxIndicator">
+												<CheckIcon />
+											</Checkbox.Indicator>
+										</Checkbox.Root>
+										<label
+											className="Label"
+											htmlFor={id}
+										>
+											{nome}
+										</label>
+									</div>
+								))}
+							</Collapsible.Content>
+						</Collapsible.Root>
+					</fieldset>
 					<button type="submit">Finalizar reserva</button>
 				</form>
 			</section>
-      <ResumoReserva reserva={reserva} />
+			<ResumoReserva reserva={reserva} />
 		</>
 	);
 }

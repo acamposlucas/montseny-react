@@ -157,5 +157,57 @@
 
       }
     }
+
+
+  }
+}
+
+.CollapsibleRoot {
+  .servicos__container {
+    justify-content: center;
+    display: flex;
+    gap: f.pxToRem(8);
+  }
+
+  .IconButton {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid v.$cor-principal;
+    padding-inline: 8px;
+    padding-block: 8px;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: v.$cor-principal;
+      color: v.$cor-letra-clara;
+    }
+  }
+
+  .Text {
+    font-size: v.$text-lg;
+  }
+
+  .collapsible__content {
+    display: flex;
+    gap: f.pxToRem(8);
+    justify-content: center;
+    margin-block-start: f.pxToRem(16);
+  }
+
+  .checkbox__container {
+    display: flex;
+    align-items: center;
+    gap: f.pxToRem(8);
+
+    .CheckboxRoot {
+      background-color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

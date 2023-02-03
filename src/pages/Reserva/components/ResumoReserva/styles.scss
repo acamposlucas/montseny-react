@@ -1,9 +1,20 @@
 @use "src/sass/sass-utils/functions.scss" as f;
+@use "src/sass/sass-utils/variaveis.scss" as v;
 
 .dialog__trigger {
   position: fixed;
   top: 50%;
+  cursor: pointer;
   right: 5vw;
+  border: 1px solid v.$cor-principal;
+  border-radius: 9999px;
+  background-color: v.$cor-letra-clara;
+  padding: f.pxToRem(8);
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .dialog__overlay {
@@ -29,6 +40,26 @@
     display: flex;
     flex-direction: column;
     gap: f.pxToRem(16);
+
+    h3 {
+      color: v.$cor-principal;
+      font-size: v.$text-lg;
+    }
+
+    .img__container {
+      figure {
+        img {
+          width: 100%;
+          border-radius: 6px;
+        }
+
+        caption {
+          display: block;
+          text-align: left;
+          font-size: v.$text-sm;
+        }
+      }
+    }
   }
 
   button[type="button"] {
