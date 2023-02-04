@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root/Root";
+import { ReservaContextProvider } from "./contexts/ReservaContext";
 import { Acomodacoes } from "./pages/Acomodacoes/Acomodacoes";
 import { CadastroPage } from "./pages/Cadastro/CadastroPage";
 import { HomePage } from "./pages/Home/HomePage";
@@ -44,6 +45,8 @@ const router = createBrowserRouter([
 
 export default function App() {
 	return (
+    <ReservaContextProvider>
       <RouterProvider router={router} />
+    </ReservaContextProvider>
   );
 }

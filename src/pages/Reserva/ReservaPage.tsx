@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
-import { Quarto, Reserva } from "../../@types/interfaces";
+import { Quarto } from "../../@types/interfaces";
 import "./styles.scss";
+import ReservaContext from "../../contexts/ReservaContext";
 
 const quartos: Quarto[] = [
 	{
@@ -39,21 +40,7 @@ const servicos = [
 ];
 
 export function ReservaPage() {
-	const [reserva, setReserva] = useState<Reserva>({
-		checkIn: "",
-		checkOut: "",
-		quantidadeDePessoas: 0,
-		quarto: {
-			id: 0,
-			nome: "",
-			descricao: "",
-			imgUrl: "",
-			valor: 0,
-		},
-		servicosSelecionados: [],
-		totalDeDias: 0,
-		total: 0,
-	});
+	const { reserva, setReserva } = useContext(ReservaContext);
 	const [open, setOpen] = React.useState(false);
 
 	function handleOpenServicosExtras() {
