@@ -1,9 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { BookmarkFilledIcon } from "@radix-ui/react-icons";
-import { Reserva } from "../../../../@types/interfaces/reserva";
+import { useContext } from "react";
+import ReservaContext from "../../../../contexts/ReservaContext";
 import "./styles.scss";
 
-export default function ResumoReserva({ reserva }: { reserva: Reserva }) {
+export default function ResumoReserva() {
+	const { reserva } = useContext(ReservaContext);
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger className="dialog__trigger">
@@ -19,15 +21,13 @@ export default function ResumoReserva({ reserva }: { reserva: Reserva }) {
 					<Dialog.Title>Resumo da reserva</Dialog.Title>
 					<div className="dialog__description">
 						<h3>{reserva.quarto.nome}</h3>
-            <figure className="img__container">
-              <img
-                src={reserva.quarto.imgUrl}
-                alt=""
-              />
-              <figcaption>
-                {reserva.quarto.descricao}
-              </figcaption>
-            </figure>
+						<figure className="img__container">
+							<img
+								src={reserva.quarto.imgUrl}
+								alt=""
+							/>
+							<figcaption>{reserva.quarto.descricao}</figcaption>
+						</figure>
 						<span>
 							Check-in:{" "}
 							<strong>
@@ -49,11 +49,16 @@ export default function ResumoReserva({ reserva }: { reserva: Reserva }) {
 							</strong>
 						</span>
 					</div>
-          <ul>
-            {reserva.servicosSelecionados.map((servico) => (
-              <li key={servico.id}>{servico.nome}</li>
-            ))}
-          </ul>
+					<ul>
+						<li>
+							Serviços adicionais:
+							<ul>
+								{reserva.servicosSelecionados.map((servico) => (
+									<li key={servico.id}>{servico.nome}</li>
+								))}
+							</ul>
+						</li>
+					</ul>
 					<Dialog.Close>Fechar</Dialog.Close>
 				</Dialog.Content>
 			</Dialog.Portal>

@@ -225,7 +225,7 @@ export function ReservaPage() {
 					<button type="submit">Finalizar reserva</button>
 				</form>
 			</section>
-			<ResumoReserva reserva={reserva} />
+			<ResumoReserva />
 		</>
 	);
 }
