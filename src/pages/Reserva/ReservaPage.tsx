@@ -43,6 +43,28 @@ export function ReservaPage() {
 	const { reserva, setReserva } = useContext(ReservaContext);
 	const [open, setOpen] = React.useState(false);
 
+	function calculaTotalDeDias() {
+		const diferencaEmMs =
+			new Date(reserva.checkOut).valueOf() - new Date(reserva.checkIn).valueOf();
+		const diferencaEmDias = diferencaEmMs / (1000 * 60 * 60 * 24);
+		return diferencaEmDias;
+	}
+
+	function calculaTotalDaReserva() {
+		let total = 0;
+		let valorServicos = 0;
+		const dias = calculaTotalDeDias();
+		const valorQuarto = reserva.quarto.valor;
+		if (reserva.servicosSelecionados.length > 0) {
+			valorServicos = reserva.servicosSelecionados.reduce(
+				(accumulator, { valor }) => accumulator + valor,
+				0
+			);
+		}
+		total = valorQuarto * dias + valorServicos;
+		return total;
+	}
+
 	function handleOpenServicosExtras() {
 		setOpen((state) => !state);
 	}
@@ -94,6 +116,11 @@ export function ReservaPage() {
 
 	function handleOnSubmit(e: FormEvent) {
 		e.preventDefault();
+    setReserva({
+      ...reserva,
+      totalDeDias: calculaTotalDeDias(),
+      total: calculaTotalDaReserva(),
+    });
 		console.log(reserva);
 	}
 
@@ -115,7 +142,7 @@ export function ReservaPage() {
 									type="date"
 									id="checkIn"
 									name="checkIn"
-									defaultValue={""}
+                  value={reserva.checkIn}
 									onChange={handleChange}
 								/>
 							</div>
@@ -125,7 +152,7 @@ export function ReservaPage() {
 									type="date"
 									id="checkOut"
 									name="checkOut"
-									defaultValue={""}
+									value={reserva.checkOut}
 									onChange={handleChange}
 								/>
 							</div>
@@ -196,7 +223,7 @@ export function ReservaPage() {
 					<fieldset>
 						<legend className="sr-only">Serviços Extras</legend>
 						<button
-            className=""
+							className=""
 							type="button"
 							onClick={handleOpenServicosExtras}
 						>
