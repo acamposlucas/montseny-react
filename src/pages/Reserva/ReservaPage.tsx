@@ -166,7 +166,7 @@ export function ReservaPage() {
 									name="quantidadeDePessoas"
 									min={1}
 									max={4}
-									defaultValue={1}
+									value={reserva.quantidadeDePessoas}
 									onChange={handleChange}
 								/>
 							</div>
@@ -208,6 +208,7 @@ export function ReservaPage() {
 												name="quarto"
 												value={quarto.id}
 												onChange={handleChange}
+                        checked={reserva.quarto.id === quarto.id}
 											/>
 											<label
 												htmlFor={quarto.nome.toLowerCase()}
@@ -231,19 +232,20 @@ export function ReservaPage() {
 						</button>
 						{open && (
 							<ul className="checkbox__list">
-								{servicos.map(({ id, nome }) => (
+								{servicos.map((servico) => (
 									<li
-										key={id}
+										key={servico.id}
 										className="checkbox__container"
 									>
 										<input
 											className="checkbox"
 											type="checkbox"
 											name="servicos"
-											value={id}
+											value={servico.id}
 											onChange={handleChange}
+                      checked={reserva.servicosSelecionados.some(({id}) => servico.id === id)}
 										/>
-										{nome}
+										{servico.nome}
 									</li>
 								))}
 							</ul>
