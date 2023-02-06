@@ -10,7 +10,7 @@ const quartos: Quarto[] = [
 		nome: "Ofurô",
 		descricao:
 			"Delicie-se com um banho aromático de ofurô com privacidade e aconchego, escolha uma de nossas cabanas! Feitas de madeira, com varanda e vista para o bosque, são equipadas com tudo o que você precisa para relaxar em grande estilo.",
-		valor: 200,
+		valor: 900,
 		imgUrl: "src/assets/images/quarto_ofuro.webp",
 	},
 	{
@@ -18,7 +18,7 @@ const quartos: Quarto[] = [
 		nome: "Master",
 		descricao:
 			"O Chalé Master, com aproximadamente 50m² de requinte e aconchego, oferece quarto e hall de entrada totalmente integrados e separados da área externa. Possui uma vista única que proporcionará uma experiência inesquecível, um banheiro e lareira para os dias de frio.",
-		valor: 200,
+		valor: 800,
 		imgUrl: "src/assets/images/quarto_master.webp",
 	},
 	{
@@ -26,7 +26,7 @@ const quartos: Quarto[] = [
 		nome: "Luxo Família",
 		descricao:
 			"O Chalé Luxo Família é ideal para famílias de até 4 pessoas. Possui uma encantadora vista do vale e do lago e uma aconchegante lareira para os dias de frio. Conta com uma linda área externa e varanda privativa.",
-		valor: 200,
+		valor: 700,
 		imgUrl: "src/assets/images/quarto_familia.webp",
 	},
 ];
