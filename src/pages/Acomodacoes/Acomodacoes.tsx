@@ -1,4 +1,5 @@
 import "../../sass/pages/acomodacoes.scss";
+import Galeria from "./Galeria";
 
 export function Acomodacoes() {
     return (
@@ -16,78 +17,7 @@ export function Acomodacoes() {
             </div>
             <section>
                 <article className="secao-acomodacoes">
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/chaleofuro.webp"
-                            title="Chalé com Ofurô"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé com Ofurô</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/master.webp"
-                            title="Chalé Master com Hidromassagem"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé Master</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/familia.webp"
-                            title="Chalés Luxo Família"
-                        />
-                        <p className="secao-acomodacoes__text">Chalés Luxo Família</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/prime.png"
-                            title="Chalé Prime"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé Prime</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/deluxe.png"
-                            title="Chalé Deluxe"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé Deluxe</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/mezanino.jpg"
-                            title="Chalé luxo Mezanino"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé luxo Mezanino</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/refúgio 1.webp"
-                            title="Chalé Refúgio"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé Refúgio</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/standard.webp"
-                            title="Chalé Luxo"
-                        />
-                        <p className="secao-acomodacoes__text">Chalé Standard</p>
-                    </div>
-                    <div>
-                        <img
-                            className="secao-acomodacoes__img"
-                            src="src/assets/images/Minichalé.webp"
-                            title="Minichalé"
-                        />
-                        <p className="secao-acomodacoes__text">Minichalé</p>
-                    </div>
+                    <Galeria />
                 </article>
 
                 <article className="secao-destaque">
