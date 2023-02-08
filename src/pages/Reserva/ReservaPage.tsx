@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useContext, useRef, useState } from "react";
 import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
 import { Quarto } from "../../@types/interfaces";
 import "./styles.scss";
@@ -44,6 +44,7 @@ export function ReservaPage() {
   const navigate = useNavigate();
 	const { reserva, setReserva } = useContext(ReservaContext);
 	const [open, setOpen] = React.useState(false);
+  const discountRef = useRef<HTMLInputElement>(null);
 
 	function calculaTotalDeDias() {
 		const diferencaEmMs =
@@ -70,6 +71,20 @@ export function ReservaPage() {
 
 	function handleOpenServicosExtras() {
 		setOpen((state) => !state);
+	}
+
+	function handleApplyDiscount(e: React.MouseEvent) {
+		if (discountRef.current !== null) {
+			if (discountRef.current.value === "CUPOM10") {
+				const total = reserva.total - 0.1 * reserva.total;
+
+				setReserva({
+					...reserva,
+					total,
+				});
+				console.log(reserva.total);
+			}
+		}
 	}
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -260,6 +275,21 @@ export function ReservaPage() {
 							</ul>
 						)}
 					</fieldset>
+          <fieldset>
+            <legend>Desconto</legend>
+            <input
+						type="text"
+						name=""
+						id=""
+						ref={discountRef}
+					/>
+					<button
+						type="button"
+						onClick={handleApplyDiscount}
+					>
+						Aplicar desconto
+					</button>
+          </fieldset>
 					<button type="submit">Finalizar reserva</button>
 				</form>
 			</section>

@@ -5,7 +5,6 @@ import { Acomodacoes } from "./pages/Acomodacoes/Acomodacoes";
 import { CadastroPage } from "./pages/Cadastro/CadastroPage";
 import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
-import { FinalizarReserva } from "./pages/Reserva/FinalizarReserva";
 import { ReservaPage } from "./pages/Reserva/ReservaPage";
 import { SobrePage } from "./pages/Sobre/SobrePage";
 
@@ -24,10 +23,6 @@ const router = createBrowserRouter([
       {
         path: "/reserva",
         element: <ReservaPage />,
-      },
-      {
-        path: "/finalizarReserva",
-        element: <FinalizarReserva />
       },
       {
         path: "/acomodacoes",

@@ -49,6 +49,8 @@ export default function ResumoReserva() {
 							</strong>
 						</span>
 					</div>
+          {reserva.servicosSelecionados.length > 0
+          ? (
 					<ul>
 						<li>
 							Serviços adicionais:
@@ -59,6 +61,16 @@ export default function ResumoReserva() {
 							</ul>
 						</li>
 					</ul>
+          ) : (
+            null
+          )}
+          <div>
+            <strong>Total da reserva: </strong>
+            <strong>{Intl.NumberFormat("pt-br", {
+              style: "currency",
+              currency: "BRL"
+            }).format(reserva.total)}</strong>
+          </div>
 					<Dialog.Close>Fechar</Dialog.Close>
 				</Dialog.Content>
 			</Dialog.Portal>
