@@ -3,6 +3,7 @@ import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
 import { Quarto } from "../../@types/interfaces";
 import "./styles.scss";
 import ReservaContext from "../../contexts/ReservaContext";
+import { useNavigate } from "react-router-dom";
 
 const quartos: Quarto[] = [
 	{
@@ -40,12 +41,14 @@ const servicos = [
 ];
 
 export function ReservaPage() {
+  const navigate = useNavigate();
 	const { reserva, setReserva } = useContext(ReservaContext);
 	const [open, setOpen] = React.useState(false);
 
 	function calculaTotalDeDias() {
 		const diferencaEmMs =
-			new Date(reserva.checkOut).valueOf() - new Date(reserva.checkIn).valueOf();
+			new Date(reserva.checkOut).valueOf() -
+			new Date(reserva.checkIn).valueOf();
 		const diferencaEmDias = diferencaEmMs / (1000 * 60 * 60 * 24);
 		return diferencaEmDias;
 	}
@@ -114,14 +117,15 @@ export function ReservaPage() {
 		});
 	}
 
-	function handleOnSubmit(e: FormEvent) {
+	function handleOnSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-    setReserva({
-      ...reserva,
-      totalDeDias: calculaTotalDeDias(),
-      total: calculaTotalDaReserva(),
-    });
+		setReserva({
+		  ...reserva,
+		  totalDeDias: calculaTotalDeDias(),
+		  total: calculaTotalDaReserva(),
+		});
 		console.log(reserva);
+    navigate("/finalizarReserva")
 	}
 
 	return (
@@ -142,7 +146,7 @@ export function ReservaPage() {
 									type="date"
 									id="checkIn"
 									name="checkIn"
-                  value={reserva.checkIn}
+									value={reserva.checkIn}
 									onChange={handleChange}
 								/>
 							</div>
@@ -208,7 +212,10 @@ export function ReservaPage() {
 												name="quarto"
 												value={quarto.id}
 												onChange={handleChange}
-                        checked={reserva.quarto.id === quarto.id}
+												checked={
+													reserva.quarto.id ===
+													quarto.id
+												}
 											/>
 											<label
 												htmlFor={quarto.nome.toLowerCase()}
@@ -243,7 +250,9 @@ export function ReservaPage() {
 											name="servicos"
 											value={servico.id}
 											onChange={handleChange}
-                      checked={reserva.servicosSelecionados.some(({id}) => servico.id === id)}
+											checked={reserva.servicosSelecionados.some(
+												({ id }) => servico.id === id
+											)}
 										/>
 										{servico.nome}
 									</li>
