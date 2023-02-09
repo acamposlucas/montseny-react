@@ -3,7 +3,8 @@ import ResumoReserva from "./components/ResumoReserva/ResumoReserva";
 import { Quarto } from "../../@types/interfaces";
 import "./styles.scss";
 import ReservaContext from "../../contexts/ReservaContext";
-import { useNavigate } from "react-router-dom";
+import { generateRandomCode } from "../../helpers/generateRandomCode";
+import { Cupom } from "../../components/Cupom/Cupom";
 
 const quartos: Quarto[] = [
 	{
@@ -40,10 +41,12 @@ const servicos = [
 	{ id: "banheiro", nome: "Banheiro", valor: 60 },
 ];
 
+const cupomDesconto = generateRandomCode();
+
 export function ReservaPage() {
-  const navigate = useNavigate();
 	const { reserva, setReserva } = useContext(ReservaContext);
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
+  const [cupomUtilizado, setCupomUtilizado] = useState(false);
   const discountRef = useRef<HTMLInputElement>(null);
 
 	function calculaTotalDeDias() {
@@ -73,9 +76,9 @@ export function ReservaPage() {
 		setOpen((state) => !state);
 	}
 
-	function handleApplyDiscount(e: React.MouseEvent) {
+	function handleApplyDiscount() {
 		if (discountRef.current !== null) {
-			if (discountRef.current.value === "CUPOM10") {
+			if (discountRef.current.value === cupomDesconto) {
 				const total = reserva.total - 0.1 * reserva.total;
 
 				setReserva({
@@ -85,6 +88,8 @@ export function ReservaPage() {
 				console.log(reserva.total);
 			}
 		}
+
+    setCupomUtilizado(state => !state);
 	}
 
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -139,8 +144,6 @@ export function ReservaPage() {
 		  totalDeDias: calculaTotalDeDias(),
 		  total: calculaTotalDaReserva(),
 		});
-		console.log(reserva);
-    navigate("/finalizarReserva")
 	}
 
 	return (
@@ -282,10 +285,12 @@ export function ReservaPage() {
 						name=""
 						id=""
 						ref={discountRef}
+            readOnly={cupomUtilizado}
 					/>
 					<button
 						type="button"
 						onClick={handleApplyDiscount}
+            disabled={cupomUtilizado || (reserva.quarto.id === 0)}
 					>
 						Aplicar desconto
 					</button>
@@ -294,6 +299,7 @@ export function ReservaPage() {
 				</form>
 			</section>
 			<ResumoReserva />
+      <Cupom cupomDesconto={cupomDesconto} />
 		</>
 	);
 }

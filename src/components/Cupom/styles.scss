@@ -1,0 +1,25 @@
+@use "src/sass/sass-utils/functions.scss" as f;
+@use "src/sass/sass-utils/variaveis.scss" as v;
+@use "src/sass/sass-utils/mixins.scss" as m;
+
+.cupom__container {
+  background-color: v.$cor-link;
+  max-width: f.pxToRem(328);
+  padding-block: f.pxToRem(16);
+  padding-inline: f.pxToRem(16);
+  border-radius: 6px;
+  position: fixed;
+  right: 10vw;
+  bottom: 5vw;
+  @include m.shadow;
+
+  .cupom__title {
+    display: block;
+    font-size: v.$text-lg;
+  }
+
+  .cupom__code {
+    display: block;
+    text-align: center;
+  }
+}
