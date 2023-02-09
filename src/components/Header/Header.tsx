@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 import "./header.scss";
 
 export default function Header() {
+  const { user } = useContext(UserContext);
 	return (
 		<header className="main__header">
 			<div className="header__logo__container">
@@ -20,7 +23,11 @@ export default function Header() {
               <li><Link to="/reserva">Reserva</Link></li>
               <li><Link to="/acomodacoes">Acomodações</Link></li>
               <li><Link to="/contato">Contato</Link></li>
-              <li><Link to="/login">Login</Link></li>
+              {user.nome ? (
+                <li><Link to="#">Olá, {user.nome}</Link></li>
+              ) : (
+                <li><Link to="/login">Login</Link></li>
+              )}
 						</ul>
 					</nav>
 				</div>
