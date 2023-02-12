@@ -1,0 +1,31 @@
+@use "src/sass/sass-utils/_variaveis.scss" as v;
+@use "src/sass/sass-utils/_functions.scss" as f;
+
+.user__menu {
+	position: relative;
+
+	button {
+		display: none;
+	}
+
+	&:hover {
+		button {
+			appearance: none;
+			border: none;
+			color: v.$cor-letra-escura;
+			background-color: v.$cor-apoio;
+			display: block;
+			position: absolute;
+			bottom: calc(f.pxToRem(32) * -1);
+			right: 0;
+			padding-block: f.pxToRem(4);
+			padding-inline: f.pxToRem(4);
+			border-radius: 4px;
+
+			&:hover {
+				background-color: v.$cor-secundaria;
+				color: v.$cor-letra-clara;
+			}
+		}
+	}
+}
