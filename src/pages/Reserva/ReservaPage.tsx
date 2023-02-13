@@ -5,6 +5,8 @@ import "./styles.scss";
 import ReservaContext from "../../contexts/ReservaContext";
 import { generateRandomCode } from "../../helpers/generateRandomCode";
 import { Cupom } from "../../components/Cupom/Cupom";
+import { calculaTotalDaReserva } from "../../helpers/calculaTotalDaReserva";
+import { calculaTotalDeDias } from "../../helpers/calculaTotalDeDias";
 
 const quartos: Quarto[] = [
 	{
@@ -48,29 +50,6 @@ export function ReservaPage() {
 	const [open, setOpen] = useState(false);
   const [cupomUtilizado, setCupomUtilizado] = useState(false);
   const discountRef = useRef<HTMLInputElement>(null);
-
-	function calculaTotalDeDias() {
-		const diferencaEmMs =
-			new Date(reserva.checkOut).valueOf() -
-			new Date(reserva.checkIn).valueOf();
-		const diferencaEmDias = diferencaEmMs / (1000 * 60 * 60 * 24);
-		return diferencaEmDias;
-	}
-
-	function calculaTotalDaReserva() {
-		let total = 0;
-		let valorServicos = 0;
-		const dias = calculaTotalDeDias();
-		const valorQuarto = reserva.quarto.valor;
-		if (reserva.servicosSelecionados.length > 0) {
-			valorServicos = reserva.servicosSelecionados.reduce(
-				(accumulator, { valor }) => accumulator + valor,
-				0
-			);
-		}
-		total = valorQuarto * dias + valorServicos;
-		return total;
-	}
 
 	function handleOpenServicosExtras() {
 		setOpen((state) => !state);
@@ -127,7 +106,6 @@ export function ReservaPage() {
 					servicosSelecionados,
 				});
 			}
-			console.log(reserva);
 			return;
 		}
 
@@ -141,9 +119,10 @@ export function ReservaPage() {
 		e.preventDefault();
 		setReserva({
 		  ...reserva,
-		  totalDeDias: calculaTotalDeDias(),
-		  total: calculaTotalDaReserva(),
+		  totalDeDias: calculaTotalDeDias(reserva),
+		  total: calculaTotalDaReserva(reserva),
 		});
+		console.log(reserva);
 	}
 
 	return (
@@ -299,7 +278,7 @@ export function ReservaPage() {
 				</form>
 			</section>
 			<ResumoReserva />
-      <Cupom cupomDesconto={cupomDesconto} />
+      {/* <Cupom cupomDesconto={cupomDesconto} /> */}
 		</>
 	);
 }

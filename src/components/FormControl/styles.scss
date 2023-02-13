@@ -1,0 +1,31 @@
+@use "src/sass/sass-utils/_functions" as f;
+@use "src/sass/sass-utils/_variaveis" as v;
+
+.form-control {
+  
+  label {
+
+  }
+
+  input {
+    padding-block: f.pxToRem(8);
+    padding-inline: f.pxToRem(8);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    width: 100%;
+
+    &:focus {
+      border-color: v.$cor-apoio;
+    }
+
+    &:invalid {
+      border-color: red;
+    }
+  }
+
+  span[role="alert"] {
+    display: block;
+    color: v.$cor-apoio-claro;
+    padding-block-start: f.pxToRem(4);
+  }
+}

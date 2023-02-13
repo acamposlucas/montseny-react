@@ -2,10 +2,12 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { BookmarkFilledIcon } from "@radix-ui/react-icons";
 import { useContext } from "react";
 import ReservaContext from "../../../../contexts/ReservaContext";
+import { calculaTotalDaReserva } from "../../../../helpers/calculaTotalDaReserva";
 import "./styles.scss";
 
 export default function ResumoReserva() {
 	const { reserva } = useContext(ReservaContext);
+
 	return (
 		<Dialog.Root>
 			<Dialog.Trigger className="dialog__trigger">
@@ -69,7 +71,7 @@ export default function ResumoReserva() {
             <strong>{Intl.NumberFormat("pt-br", {
               style: "currency",
               currency: "BRL"
-            }).format(reserva.total)}</strong>
+            }).format(calculaTotalDaReserva(reserva))}</strong>
           </div>
 					<Dialog.Close>Fechar</Dialog.Close>
 				</Dialog.Content>

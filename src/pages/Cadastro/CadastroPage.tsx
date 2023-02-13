@@ -1,50 +1,105 @@
+import { FormEvent, useState } from "react";
+import { FormControl } from "../../components/FormControl/FormControl";
 import "../../sass/pages/cadastro.scss";
 
-export function CadastroPage () {
-    return (
-         <main>
-        <div className="formulario-container">
-            <form className="formulario-cadastro" action="../../index.html" method="post">
-                <h2 className="mensagem-cadastro">Bem vindo a tela de cadastro</h2>
-                <div className="input-container">
+const inputs = [
+	{
+		id: 1,
+		name: "nome",
+		type: "text",
+		placeholder: "Nome completo",
+		errorMessage: "Campo nome é obrigatório",
+		label: "Nome completo",
+		required: true,
+	},
+	{
+		id: 2,
+		name: "email",
+		type: "email",
+		placeholder: "Email",
+		errorMessage: "Campo email é obrigatório",
+		label: "Email",
+		required: true,
+	},
+	{
+		id: 3,
+		name: "cpf",
+		type: "text",
+		placeholder: "CPF",
+		errorMessage: "Campo CPF é obrigatório",
+		label: "CPF",
+		required: true,
+	},
+	{
+		id: 4,
+		name: "telefone",
+		type: "text",
+		placeholder: "Telefone",
+		errorMessage: "Campo telefone é obrigatório",
+		label: "Telefone",
+		required: true,
+	},
+	{
+		id: 5,
+		name: "senha",
+		type: "password",
+		placeholder: "Senha",
+		errorMessage: "Campo senha é obrigatório",
+		label: "Senha",
+		required: true,
+	},
+	{
+		id: 6,
+		name: "confirmarSenha",
+		type: "password",
+		placeholder: "Confirmar Senha",
+		errorMessage: "Campo senha é obrigatório",
+		label: "Confirmar senha",
+		required: true,
+	},
+];
 
-                    <input className="input-cadastro" type="text" name="nomeCompleto" id="nomeCompleto" placeholder="Nome Completo" />
-                </div>
-                <div className="input-container">
+export function CadastroPage() {
+	const [formData, setFormData] = useState({
+		nome: "",
+		email: "",
+		senha: "",
+		confirmarSenha: "",
+	})
 
-                    <input className="input-cadastro" type="email" name="email" id="email" placeholder="Email" />
-                </div>
-                <div className="input-container">
+	function handleSubmit(e: FormEvent) {
+		e.preventDefault();
+		console.log(formData);
+	}
 
-                    <input className="input-cadastro" type="password" name="senha" id="senha" placeholder="Senha" />
-                </div>
-                <div className="input-container">
+	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value
+		});
+	}
 
-                    <input className="input-cadastro" type="password" name="confirmarsenha" placeholder="Confirmar Senha" />
-                </div>
-                <div className="input-container">
-
-                    <input className="input-cadastro" type="text" name="cpf" id="cpf" placeholder="CPF" />
-                </div>
-                <div className="input-container">
-
-                    <input className="input-cadastro" type="text" name="telefone" id="telefone" placeholder="Telefone" />
-                </div>
-                <div className="input-container">
-
-                    <input className="input-cadastro" type="month" name="date" id="date" placeholder="Data de Nascimento" />
-                </div>
-                <div className="input-container">
-
-                    <input className="input-cadastro" type="text" name="cep" id="cep" placeholder="CEP"  />
-                </div>
-
-                <div className="botao-formulario">
-                    <button className="botaoEscuroMenor">Finalizar</button>
-                </div>
-                
-            </form>
-        </div>
-        </main>
-    )
+	return (
+		<main>
+			<div className="formulario-container">
+				<form
+					onSubmit={handleSubmit}
+					className="formulario-cadastro"
+				>
+					<h2 className="mensagem-cadastro">
+						Bem vindo a tela de cadastro
+					</h2>
+					<div className="input-container">
+						{inputs.map(({ label, errorMessage, id, name, placeholder, type, required }) => (
+							<FormControl key={id} label={label} errorMessage={errorMessage} id={id} name={name} placeholder={placeholder} onChange={handleChange} type={type} required={required}/>
+						))}
+					</div>
+					<div className="botao-formulario">
+						<button className="botaoEscuroMenor">Finalizar</button>
+					</div>
+				</form>
+			</div>
+		</main>
+	);
 }
+
