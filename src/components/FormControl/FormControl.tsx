@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import "./styles.scss";
 
 interface FormControlProps {
@@ -22,6 +22,11 @@ export function FormControl({
 	name,
 	required
 }: FormControlProps) {
+	const [inputIsDirty, setInputIsDirty] = useState(false);
+
+	function handleBlur() {
+		setInputIsDirty(true);
+	}
 
 	return (
 		<div className="form-ctrl">
@@ -36,6 +41,8 @@ export function FormControl({
 				id={String(id)}
 				onChange={onChange}
 				required={required}
+				data-dirty={inputIsDirty}
+				onBlur={handleBlur}
 			/>
 			<span role="alert">{errorMessage}</span>
 		</div>

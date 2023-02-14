@@ -1,31 +1,42 @@
 @use "src/sass/sass-utils/_functions" as f;
 @use "src/sass/sass-utils/_variaveis" as v;
 
-.form-control {
-  
-  label {
+.form-ctrl {
 
-  }
+	& + .form-ctrl {
+		margin-block-start: f.pxToRem(24);
+	}
 
-  input {
-    padding-block: f.pxToRem(8);
-    padding-inline: f.pxToRem(8);
-    border: 2px solid transparent;
-    border-radius: 6px;
-    width: 100%;
+	label {
+	}
 
-    &:focus {
-      border-color: v.$cor-apoio;
-    }
+	input {
+		border: 2px solid transparent;
+		border-radius: 6px;
+		font-size: f.pxToRem(18);
+		padding-block: f.pxToRem(8);
+		padding-inline: f.pxToRem(8);
+		width: 100%;
 
-    &:invalid {
-      border-color: red;
-    }
-  }
+		&:focus {
+			border-color: v.$cor-apoio;
+		}
 
-  span[role="alert"] {
-    display: block;
-    color: v.$cor-apoio-claro;
-    padding-block-start: f.pxToRem(4);
-  }
+		&:not(:placeholder-shown):invalid:not(:focus) {
+			& ~ span {
+				display: block;
+			}
+		}
+
+		&[data-dirty='true']:invalid ~ span {
+			display: block;
+		}
+	
+	}
+
+	span[role="alert"] {
+		display: none;
+		color: red;
+		padding-block-start: f.pxToRem(4);
+	}
 }

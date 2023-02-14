@@ -65,10 +65,15 @@ export function CadastroPage() {
 		email: "",
 		senha: "",
 		confirmarSenha: "",
+		cpf: "",
+		telefone: "",
 	})
 
 	function handleSubmit(e: FormEvent) {
 		e.preventDefault();
+		if(formData.senha !== formData.confirmarSenha) {
+			alert("As senhas não são iguais")
+		}
 		console.log(formData);
 	}
 
@@ -91,7 +96,7 @@ export function CadastroPage() {
 					</h2>
 					<div className="input-container">
 						{inputs.map(({ label, errorMessage, id, name, placeholder, type, required }) => (
-							<FormControl key={id} label={label} errorMessage={errorMessage} id={id} name={name} placeholder={placeholder} onChange={handleChange} type={type} required={required}/>
+							<FormControl key={id} label={label} errorMessage={errorMessage} id={id} name={name} placeholder={placeholder} onChange={handleChange} type={type} required={required} />
 						))}
 					</div>
 					<div className="botao-formulario">
